@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>i am the bitfixr.</title>
+    <title>i am the bitfixr</title>
     <meta name="description" content="i fix bits. — reach out: diego@bitfixr.io" />
     <!-- Wrench favicon (emoji) -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🔧</text></svg>">
@@ -28,6 +28,7 @@
         justify-content: center;
         align-items: center;
         min-height: 100svh;
+        position: relative;
       }
       main { text-align: center; flex: 1; display: flex; flex-direction: column; justify-content: center; }
       h1 {
@@ -43,11 +44,18 @@
       .bits-link {
         color: var(--link);
         cursor: pointer;
-        text-decoration: none;
+        text-decoration: underline;
       }
       footer {
         text-align: center;
         padding: 10px 0;
+      }
+      .source-link {
+        position: absolute;
+        bottom: 5px;
+        left: 10px;
+        font-size: 12px;
+        color: var(--muted);
       }
     </style>
   </head>
@@ -61,18 +69,19 @@
     </main>
     <footer>
       <p>
-        <a href="https://github.com/bncmn" target="_blank">github</a> ·
         <a href="https://www.linkedin.com/in/bncmn/" target="_blank">linkedin</a> ·
-        <a href="https://www.instagram.com/dbuencs/" target="_blank">instagram</a>
+        <a href="https://www.instagram.com/dbuencs/" target="_blank">instagram</a> ·
+        <a href="https://github.com/bncmn" target="_blank">github</a>
       </p>
     </footer>
+    <a href="https://github.com/bncmn/bitfixr.io" target="_blank" class="source-link">source</a>
     <script>
       const bits = document.getElementById('bits');
       const headline = document.getElementById('headline');
       const originalHTML = headline.innerHTML;
 
       bits.addEventListener('click', () => {
-        headline.textContent = "(consumer electronics)";
+        headline.textContent = "((some) consumer electronics)";
         setTimeout(() => {
           headline.innerHTML = originalHTML;
         }, 2000);
@@ -83,7 +92,7 @@
         const newBits = document.getElementById('bits');
         if (newBits && !newBits._listenerAdded) {
           newBits.addEventListener('click', () => {
-            headline.textContent = "(consumer electronics)";
+            headline.textContent = "((some) consumer electronics)";
             setTimeout(() => {
               headline.innerHTML = originalHTML;
             }, 2000);
