@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>i fix bits.</title>
+    <meta name="description" content="i fix bits. — reach out: diego@bitfixr.io" />
+    <!-- Import IBM Plex Mono from Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        --bg: #000;
+        --text: #fff;
+        --muted: #9ca3af;
+        --link: #4169e1;
+      }
+      * { box-sizing: border-box; }
+      html, body { height: 100%; }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-height: 100svh;
+      }
+      main { text-align: center; flex: 1; display: flex; flex-direction: column; justify-content: center; }
+      h1 {
+        margin: 0 0 10px;
+        font-weight: 600;
+        font-size: 48px;
+        letter-spacing: 0.02em;
+        transition: font-size 0.3s ease;
+      }
+      p { margin: 0; font-size: 16px; color: var(--muted); }
+      a { color: inherit; }
+      a:hover, a:focus { text-decoration: underline; outline: none; }
+      .bits-link {
+        color: var(--link);
+        cursor: pointer;
+        text-decoration: none;
+      }
+      footer {
+        text-align: center;
+        padding: 10px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1 id="headline">i fix <span id="bits" class="bits-link">bits</span>.</h1>
+      <p>
+        reach out:
+        <a href="mailto:diego@bitfixr.io">diego@bitfixr.io</a>
+      </p>
+    </main>
+    <footer>
+      <p>
+        <a href="https://github.com/bncmn" target="_blank">github</a> ·
+        <a href="https://www.linkedin.com/in/bncmn/" target="_blank">linkedin</a> ·
+        <a href="https://www.instagram.com/dbuencs/" target="_blank">instagram</a>
+      </p>
+    </footer>
+    <script>
+      const bits = document.getElementById('bits');
+      const headline = document.getElementById('headline');
+      const originalHTML = headline.innerHTML;
+
+      bits.addEventListener('click', () => {
+        headline.textContent = "(consumer electronics)";
+        setTimeout(() => {
+          headline.innerHTML = originalHTML;
+        }, 2000);
+      });
+
+      // Ensure click handler works every time "bits" is reinserted
+      const observer = new MutationObserver(() => {
+        const newBits = document.getElementById('bits');
+        if (newBits && !newBits._listenerAdded) {
+          newBits.addEventListener('click', () => {
+            headline.textContent = "(consumer electronics)";
+            setTimeout(() => {
+              headline.innerHTML = originalHTML;
+            }, 2000);
+          });
+          newBits._listenerAdded = true;
+        }
+      });
+
+      observer.observe(headline, { childList: true, subtree: true });
+    </script>
+  </body>
+</html>
