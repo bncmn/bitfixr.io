@@ -64,14 +64,14 @@
       text-decoration: underline;
     }
 
-    @media (max-width: 600px) {
+    /* @media (max-width: 600px) {
       h1 {
         font-size: 36px;
       }
       .footer {
         font-size: 12px;
       }
-    }
+    } */
   </style>
 </head>
 <body>
@@ -102,7 +102,7 @@
 
         mainText.style.opacity = 0;
         setTimeout(() => {
-          mainText.style.fontSize = "44px"; // instant size change
+          mainText.style.fontSize = "34px"; // instant size change
           mainText.innerHTML = altText;
           mainText.style.opacity = 1;
         }, 500);
