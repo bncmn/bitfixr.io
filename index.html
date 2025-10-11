@@ -23,13 +23,18 @@
     h1 {
       font-size: 48px;
       margin: 0;
-      transition: opacity 0.5s ease; /* only fade, no size transition */
+      transition: opacity 0.5s ease;
     }
 
     .highlight {
       color: #4169e1;
-      text-decoration: underline;
+      text-decoration: underline dotted;
       cursor: pointer;
+      transition: text-decoration-color 0.15s ease;
+    }
+
+    .highlight:hover {
+      text-decoration-color: transparent;
     }
 
     .footer {
@@ -42,36 +47,36 @@
     }
 
     .footer a {
-      color: #aaa;
-      text-decoration: none;
+      color: #4169e1;
+      text-decoration: underline dotted;
       margin: 0 6px;
+      transition: text-decoration-color 0.15s ease;
     }
 
     .footer a:hover {
-      text-decoration: underline;
+      text-decoration-color: transparent;
     }
 
+    /* Email link inherits gray tone instead of blue */
+    .footer a[href^="mailto"] {
+      color: #aaa;
+      text-decoration: none;
+    }
+
+    /* Source link inherits gray tone */
     .source-link {
       position: absolute;
       top: 20px;
       left: 20px;
       color: #aaa;
       font-size: 12px;
-      text-decoration: none;
+      text-decoration: underline dotted;
+      transition: text-decoration-color 0.15s ease;
     }
 
     .source-link:hover {
-      text-decoration: underline;
+      text-decoration-color: transparent;
     }
-
-    /* @media (max-width: 600px) {
-      h1 {
-        font-size: 36px;
-      }
-      .footer {
-        font-size: 12px;
-      }
-    } */
   </style>
 </head>
 <body>
@@ -91,7 +96,7 @@
   <script>
     const mainText = document.getElementById("main-text");
     const originalHTML = `i fix <span class="highlight" id="bits">bits</span>.`;
-    const altText = "(some) electronics and (some) software";
+    const altText = "electronics repair and tech support.";
     let active = false;
 
     function setupInteraction() {
@@ -102,7 +107,7 @@
 
         mainText.style.opacity = 0;
         setTimeout(() => {
-          mainText.style.fontSize = "34px"; // instant size change
+          mainText.style.fontSize = "34px"; // new size
           mainText.innerHTML = altText;
           mainText.style.opacity = 1;
         }, 500);
@@ -110,12 +115,12 @@
         setTimeout(() => {
           mainText.style.opacity = 0;
           setTimeout(() => {
-            mainText.style.fontSize = "48px"; // instant size change back
+            mainText.style.fontSize = "48px";
             mainText.innerHTML = originalHTML;
             mainText.style.opacity = 1;
-            setupInteraction(); // rebind after restore
+            setupInteraction(); // rebind click
             active = false;
-          }, 300);
+          }, 500);
         }, 3500);
       });
     }
