@@ -1,131 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>i am the bitfixr</title>
-  <link rel="icon" href="https://img.icons8.com/ios-filled/50/ffffff/wrench.png" type="image/png">
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>bitfixr. - we fix bits.</title>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet" />
   <style>
+    :root {
+      --bg: #000;
+      --fg: #fff;
+      --muted: #cfcfcf;
+    }
+    * {
+      box-sizing: border-box;
+    }
     html, body {
       height: 100%;
+      overflow: hidden;
+    }
+    body {
       margin: 0;
-      background-color: #000;
-      color: #fff;
-      font-family: 'JetBrains Mono', monospace;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: 'IBM Plex Sans', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
       display: flex;
-      flex-direction: column;
-      justify-content: center;
       align-items: center;
-      text-align: center;
+      justify-content: center;
     }
-
-    h1 {
-      font-size: 48px;
-      margin: 0;
-      transition: opacity 0.5s ease;
+    .wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6vw;
+      padding: 4vw 6vw;
+      overflow: hidden;
+      white-space: nowrap;
     }
-
-    .highlight {
-      color: #4169e1;
+    .left {
+      font-family: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-weight: 400;
+      font-size: clamp(56px, 9vw, 112px);
+      letter-spacing: 0.02em;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+    .right {
+      min-width: min(42ch, 520px);
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .name {
+      font-weight: 600;
+      font-size: clamp(28px, 3vw, 40px);
+      line-height: 1.25;
+      margin: 0 0 0.6rem 0;
+      white-space: nowrap;
+    }
+    .title {
+      color: var(--muted);
+      font-size: clamp(15px, 1.5vw, 18px);
+      margin: 0 0 1.25rem 0;
+      white-space: nowrap;
+    }
+    a {
+      color: var(--fg);
       text-decoration: underline dotted;
-      cursor: pointer;
-      transition: text-decoration-color 0.15s ease;
+      text-underline-offset: 3px;
+      white-space: nowrap;
     }
-
-    .highlight:hover {
-      text-decoration-color: transparent;
+    .link {
+      display: block;
+      margin: 0.25rem 0;
+      font-size: clamp(14px, 1.3vw, 16px);
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
-
-    .footer {
-      position: absolute;
-      bottom: 40px;
-      text-align: center;
-      color: #aaa;
-      font-size: 14px;
-      line-height: 1.8;
-    }
-
-    .footer a {
-      color: #4169e1;
-      text-decoration: underline dotted;
-      margin: 0 6px;
-      transition: text-decoration-color 0.15s ease;
-    }
-
-    .footer a:hover {
-      text-decoration-color: transparent;
-    }
-
-    /* Email link inherits gray tone instead of blue */
-    .footer a[href^="mailto"] {
-      color: #aaa;
-      text-decoration: none;
-    }
-
-    /* Source link inherits gray tone */
-    .source-link {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      color: #aaa;
-      font-size: 12px;
-      text-decoration: underline dotted;
-      transition: text-decoration-color 0.15s ease;
-    }
-
-    .source-link:hover {
-      text-decoration-color: transparent;
+    @media (max-width: 720px) {
+      body {
+        overflow-y: auto;
+      }
+      .wrap {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+        white-space: normal;
+      }
+      .left {
+        font-size: clamp(44px, 14vw, 72px);
+        white-space: nowrap;
+      }
+      .right {
+        min-width: unset;
+        width: 100%;
+      }
     }
   </style>
 </head>
 <body>
-  <a href="https://github.com/bncmn/bitfixr.io" class="source-link">source</a>
-
-  <h1 id="main-text">
-    i fix <span class="highlight" id="bits">bits</span>.
-  </h1>
-
-  <div class="footer">
-    reach out: <a href="mailto:diego@bitfixr.io">diego@bitfixr.io</a><br>
-    <a href="https://www.linkedin.com/in/bncmn/" target="_blank">linkedin</a> /
-    <a href="https://github.com/bncmn" target="_blank">github</a> /
-    <a href="https://github.com/bncmn/bncmn/blob/main/resume.pdf" target="_blank">resume</a>
-  </div>
-
-  <script>
-    const mainText = document.getElementById("main-text");
-    const originalHTML = `i fix <span class="highlight" id="bits">bits</span>.`;
-    const altText = "electronics repair and tech support.";
-    let active = false;
-
-    function setupInteraction() {
-      const bits = document.getElementById("bits");
-      bits.addEventListener("click", () => {
-        if (active) return;
-        active = true;
-
-        mainText.style.opacity = 0;
-        setTimeout(() => {
-          mainText.style.fontSize = "34px"; // new size
-          mainText.innerHTML = altText;
-          mainText.style.opacity = 1;
-        }, 500);
-
-        setTimeout(() => {
-          mainText.style.opacity = 0;
-          setTimeout(() => {
-            mainText.style.fontSize = "48px";
-            mainText.innerHTML = originalHTML;
-            mainText.style.opacity = 1;
-            setupInteraction(); // rebind click
-            active = false;
-          }, 500);
-        }, 3500);
-      });
-    }
-
-    setupInteraction();
-  </script>
+  <main class="wrap" role="main">
+    <div class="left">bitfixr.</div>
+    <section class="right">
+      <h1 class="name">Diego Buencamino</h1>
+      <p class="title">Electronics Repair and Tech Support</p>
+      <a class="link" href="mailto:diego@bitfixr.io">diego@bitfixr.io</a>
+      <a class="link" href="https://www.instagram.com/bitfixr" target="_blank" rel="noopener noreferrer">@bitfixr</a>
+    </section>
+  </main>
 </body>
 </html>
